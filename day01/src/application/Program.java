@@ -52,6 +52,19 @@ public class Program {
 			
 			System.out.println(totalDistance);
 			
+			int similarity = 0;
+			for(int i : leftCoord) {
+				int aux = 0;
+				for (int j : rightCoord) {
+					if(i == j) {
+						aux++;
+					}
+				}
+				
+				similarity += (i * aux);
+			}
+			System.out.println(similarity);
+			
 			scan.close();
 		} catch(FileNotFoundException error) {
 			System.out.println("Error while reading file.");
