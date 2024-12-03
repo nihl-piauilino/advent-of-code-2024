@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import services.CheckIfSafeService;
-import services.CheckIfSortedService;
 
 public class Program {
 
@@ -30,7 +29,9 @@ public class Program {
 //				}
 //				System.out.println();
 				
-				if((CheckIfSortedService.checkIfAscend(intLevels) || CheckIfSortedService.checkIfDescend(intLevels)) && CheckIfSafeService.checkIfSafe(intLevels)) {
+				if(CheckIfSafeService.checkIfSafe(intLevels)) {
+					safeCounter++;
+				} else if(CheckIfSafeService.dampener(intLevels)) {
 					safeCounter++;
 				}
 				

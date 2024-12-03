@@ -4,17 +4,30 @@ public class CheckIfSafeService {
 
 	public static boolean checkIfSafe(int[] array) {
 		
-		// Again, doesn't hurt
-		if(array.length <= 1) {
+		if((CheckIfSortedService.checkIfAscend(array) || CheckIfSortedService.checkIfDescend(array)) && CheckAdjacents.checkAdjacents(array)) {
 			return true;
 		}
 		
-		for(int i = 1; i < array.length; i++) {
-			if((array[i] < array[i-1] + 1 && array[i] > array[i-1] - 1) || (array[i] > array[i-1] + 3) || (array[i] < array[i-1] - 3)) {
-				return false;
+		return false;
+	}
+	
+	public static boolean dampener(int[] array) {
+		
+		for(int i = 0; i < array.length; i++) {
+			int[] newArray = new int[array.length - 1];
+			int aux = 0;
+			for(int j = 0; j < newArray.length; j++) {
+				if(j == i) {
+					aux++;
+				}
+				newArray[j] = array[j + aux];
 			}
+			if(CheckIfSafeService.checkIfSafe(newArray)) {
+				return true;
+			}
+			
 		}
 		
-		return true;
+		return false;
 	}
 }
